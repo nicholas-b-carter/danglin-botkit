@@ -4,5 +4,4 @@ module.exports = {
 , agreeTos: true
 , approveDomains: [ 'example.com' ]
 , app: express()
-  })
 };
