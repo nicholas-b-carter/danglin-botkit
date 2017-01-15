@@ -1,7 +1,7 @@
 module.exports = {
   server: 'staging'
-, email: 'john.doe@example.com'
+, email: 'nicholas.b.carter@gmail.com'
 , agreeTos: true
-, approveDomains: [ 'example.com' ]
-, app: express()
+, approveDomains: [ 'herokuapp.com' ]
+, app: require('express')()
 };
