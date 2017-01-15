@@ -14,14 +14,14 @@ module.exports = function(app) {
 
   app.get('/challange', function(req, res) {
     console.log(req.body);
-    
+
   });
 
   //new user creation - redirection from Slack
   app.get('/new', function(req, res) {
     console.log("================== START TEAM REGISTRATION ==================")
     //temporary authorization code
-    var auth_code = req.query.code
+    var auth_code = req.query.challange
 
     if(!auth_code){
       //user refused auth
