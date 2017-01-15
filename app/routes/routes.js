@@ -1,5 +1,5 @@
-var Request          = require('request')
-var slack           = require('../controllers/botkit')
+const Request          = require('request')
+const slack           = require('../controllers/botkit')
 
 // frontend routes =========================================================
 module.exports = function(app) {
@@ -21,7 +21,7 @@ module.exports = function(app) {
   app.get('/new', function(req, res) {
     console.log("================== START TEAM REGISTRATION ==================")
     //temporary authorization code
-    var auth_code = req.query.challange
+    const auth_code = req.query.challange
 
     if(!auth_code){
       //user refused auth
@@ -35,9 +35,9 @@ module.exports = function(app) {
 
   //CREATION ===================================================
 
-  var perform_auth = function(auth_code, res){
+  const perform_auth = function(auth_code, res){
     //post code, app ID, and app secret, to get token
-    var auth_adresse = 'https://slack.com/api/oauth.access?'
+    const auth_adresse = 'https://slack.com/api/oauth.access?'
     auth_adresse += 'client_id=' + process.env.SLACK_ID
     auth_adresse += '&client_secret=' + process.env.SLACK_SECRET
     auth_adresse += '&code=' + auth_code
@@ -50,7 +50,7 @@ module.exports = function(app) {
       }
 
       else{
-        var auth = JSON.parse(body)
+        const auth = JSON.parse(body)
         console.log("New user auth")
         console.log(auth)
 
@@ -59,9 +59,9 @@ module.exports = function(app) {
     })
   }
 
-  var register_team = function(auth, res){
+  const register_team = function(auth, res){
     //first, get authenticating user ID
-    var url = 'https://slack.com/api/auth.test?'
+    const url = 'https://slack.com/api/auth.test?'
     url += 'token=' + auth.access_token
 
     Request.get(url, function (error, response, body) {
@@ -71,10 +71,10 @@ module.exports = function(app) {
       }
       else{
         try{
-          var identity = JSON.parse(body)
+          const identity = JSON.parse(body)
           console.log(identity)
 
-          var team = {
+          const team = {
             id: identity.team_id,
             bot:{
               token: auth.bot.bot_access_token,
@@ -97,15 +97,15 @@ module.exports = function(app) {
     })
   }
 
-  var startBot = function(team){
+  const startBot = function(team){
     console.log(team.name + " start bot")
 
     slack.connect(team)
   }
 
-  var saveUser = function(auth, identity){
+  const saveUser = function(auth, identity){
     // what scopes did we get approved for?
-    var scopes = auth.scope.split(/\,/);
+    const scopes = auth.scope.split(/\,/);
 
     slack.controller.storage.users.get(identity.user_id, function(err, user) {
       isnew = false;

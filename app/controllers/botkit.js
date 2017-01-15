@@ -15,15 +15,15 @@ if (!process.env.SLACK_ID || !process.env.SLACK_SECRET || !process.env.PORT) {
 }
 
 /* Uses the slack button feature to offer a real time bot to multiple teams */
-var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/botkit_express_demo'
-var botkit_mongo_storage = require('../../config/botkit_mongo_storage')({mongoUri: mongoUri})
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/botkit_express_demo'
+const botkit_mongo_storage = require('../../config/botkit_mongo_storage')({mongoUri: mongoUri})
 
-var Botkit = require('botkit');
-var apiai = require('botkit-middleware-apiai')({
+const Botkit = require('botkit');
+const apiai = require('botkit-middleware-apiai')({
     token: process.env.APIAI,
 });
 
-var controller = Botkit.slackbot({
+const controller = Botkit.slackbot({
   storage: botkit_mongo_storage,
 })
 console.log(apiai);
@@ -32,13 +32,13 @@ exports.controller = controller
 
 //CONNECTION FUNCTIONS=====================================================
 exports.connect = function(team_config){
-  var bot = controller.spawn(team_config);
+  const bot = controller.spawn(team_config);
   controller.trigger('create_bot', [bot, team_config]);
 }
 
 // just a simple way to make sure we don't
 // connect to the RTM twice for the same team
-var _bots = {};
+const _bots = {};
 
 function trackBot(bot) {
   _bots[bot.config.token] = bot;
@@ -134,9 +134,9 @@ controller.storage.teams.all(function(err,teams) {
   }
 
   // connect all teams with bots up to slack!
-  for (var t  in teams) {
+  for (const t  in teams) {
     if (teams[t].bot) {
-      var bot = controller.spawn(teams[t]).startRTM(function(err) {
+      const bot = controller.spawn(teams[t]).startRTM(function(err) {
         if (err) {
           console.log('Error connecting bot to Slack:',err);
         } else {
