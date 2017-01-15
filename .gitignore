@@ -1,0 +1,4 @@
+.env
+mongo/
+node_modules/
+.DS_Store
