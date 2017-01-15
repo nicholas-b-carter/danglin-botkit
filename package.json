@@ -30,13 +30,13 @@
   "scripts": {
     "start": "nf start web=1",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "watch": "babel --watch=./src --out-dir=./build --source-maps inline --copy-files",
-    "build": "babel ./src --out-dir=./build --source-maps inline --copy-files",
-    "s": "nodemon build/app.js --watch build",
-    "d": "node debug build/app.js",
+    "watch": "babel --watch=./ --out-dir=./build --source-maps inline --copy-files",
+    "build": "babel ./ --out-dir=./build --source-maps inline --copy-files",
+    "s": "nodemon server.js --watch build",
+    "d": "node debug server.js",
     "lint": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "git commit -am 'script push' && git push heroku master && heroku logs -t"
+    "deploy": "git add . && git commit -m 'script push' && git push heroku master && heroku logs -t"
   },
   "author": "",
   "license": "ISC",
