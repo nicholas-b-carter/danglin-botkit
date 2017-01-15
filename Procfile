@@ -1,3 +1,3 @@
 web: node server.js
-dev: node-supervisor server.js
-profile: node --prof  server.js
+#dev: nf server.js
+#profile: node --prof  server.js

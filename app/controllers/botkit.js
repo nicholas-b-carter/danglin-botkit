@@ -25,16 +25,14 @@ var apiai = require('botkit-middleware-apiai')({
 
 var controller = Botkit.slackbot({
   storage: botkit_mongo_storage,
-  debug: true,
 })
-
+console.log(apiai);
+controller.middleware.receive.use(apiai.receive);
 exports.controller = controller
 
 //CONNECTION FUNCTIONS=====================================================
 exports.connect = function(team_config){
   var bot = controller.spawn(team_config);
-  console.log(apiai);
-  controller.middleware.receive.use(apiai.receive);
   controller.trigger('create_bot', [bot, team_config]);
 }
 
