@@ -13,6 +13,13 @@ var open           = require('open');
 //heroku environment in production, etc...
 dotenv.load();
 
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  // kick off the ngrok tunnel;
+  ngrok.connect(function (err, url) {});
+  open('http://localhost:4040');
+}
+
 // public folder for images, css,...
 app.use(express.static(__dirname + '/public'))
 
@@ -36,9 +43,3 @@ require('./app/controllers/botkit');
 http.listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));
 });
-
-if (process.env.NODE_ENV === 'development') {
-  // kick off the ngrok tunnel;
-  ngrok.connect(function (err, url) {});
-  open('http://127.0.0.1:4040', 'chrome');
-}
