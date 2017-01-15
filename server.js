@@ -5,7 +5,7 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var http           = require('http').Server(app);
 var dotenv         = require('dotenv');
-
+var open           = require('open');
 // configuration ===========================================
 
 //load environment variables,
@@ -40,4 +40,5 @@ http.listen(app.get('port'), function(){
 if (process.env.NODE_ENV !== 'production') {
   // kick off the ngrok tunnel;
   ngrok.connect(function (err, url) {});
+  open('http://127.0.0.1:4040');
 }
