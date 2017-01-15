@@ -37,7 +37,7 @@ http.listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   // kick off the ngrok tunnel;
   ngrok.connect(function (err, url) {});
   open('http://127.0.0.1:4040', 'chrome');
