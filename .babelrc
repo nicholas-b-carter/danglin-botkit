@@ -9,4 +9,8 @@
       "method": "coroutine"
      }]
   ],
+  "ignore": [
+    "node_modules/**/*.*",
+    "build/**/*.*"
+  ]
 }
