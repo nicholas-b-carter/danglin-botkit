@@ -1,6 +1,6 @@
 // modules =================================================
-var express        = require('express');
-var app            = express();
+var express        = require('letsencrypt-express').create(require('./config/'));
+var app            = express.app();
 var bodyParser     = require('body-parser');
 var http           = require('http').Server(app);
 var dotenv         = require('dotenv');
