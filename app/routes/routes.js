@@ -12,6 +12,11 @@ module.exports = function(app) {
     res.render('root'); // load view/root.html file
   });
 
+  app.get('/challange', function(req, res) {
+    console.log(req.body);
+    
+  });
+
   //new user creation - redirection from Slack
   app.get('/new', function(req, res) {
     console.log("================== START TEAM REGISTRATION ==================")
