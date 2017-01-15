@@ -1,3 +1,3 @@
-web: node bot.js
-dev: node-supervisor bot.js
-profile: node --prof  bot.js
+web: node server.js
+dev: node-supervisor server.js
+profile: node --prof  server.js
