@@ -1,6 +1,7 @@
 // modules =================================================
-var express        = require('letsencrypt-express').create(encryptConfig);
-var app            = express.app();
+var ngrok          = require('ngrok');
+var express        = require('express');
+var app            = express();
 var bodyParser     = require('body-parser');
 var http           = require('http').Server(app);
 var dotenv         = require('dotenv');
@@ -29,9 +30,14 @@ require('./app/routes/routes')(app);
 app.set('port', (process.env.PORT));
 
 //botkit (apres port)
-require('./app/controllers/botkit')
+require('./app/controllers/botkit');
 
 //START ===================================================
 http.listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  // kick off the ngrok tunnel;
+  ngrok.connect(function (err, url) {});
+}
