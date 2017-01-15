@@ -1,23 +1,15 @@
 // modules =================================================
-var ngrok          = require('ngrok');
-var express        = require('express');
-var app            = express();
-var bodyParser     = require('body-parser');
-var http           = require('http').Server(app);
-var dotenv         = require('dotenv');
-var open           = require('open');
+const ngrok          = require('ngrok');
+const express        = require('express');
+const app            = express();
+const bodyParser     = require('body-parser');
+const http           = require('http').Server(app);
+const open           = require('open');
+const initWatcher    = require('./utils/connection/initWatcher');
 // configuration ===========================================
 
-//load environment variables,
-//either from .env files (development),
-//heroku environment in production, etc...
-dotenv.load();
-
-if (process.env.NODE_ENV !== 'production') {
-  // kick off the ngrok tunnel if were not in prod and open the browser...
-  open('http://localhost:4040');
-  ngrok.connect(function (err, url) {});
-}
+// load .env file and let ngrok determine if it needs to tunnel...
+initWatchers();
 
 // public folder for images, css,...
 app.use(express.static(__dirname + '/public'))
