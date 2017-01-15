@@ -13,11 +13,10 @@ var open           = require('open');
 //heroku environment in production, etc...
 dotenv.load();
 
-console.log(process.env.NODE_ENV);
-if (process.env.NODE_ENV === 'development') {
-  // kick off the ngrok tunnel;
-  ngrok.connect(function (err, url) {});
+if (process.env.NODE_ENV !== 'production') {
+  // kick off the ngrok tunnel if were not in prod and open the browser...
   open('http://localhost:4040');
+  ngrok.connect(function (err, url) {});
 }
 
 // public folder for images, css,...
