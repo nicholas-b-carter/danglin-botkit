@@ -1,5 +1,6 @@
 .env
 mongo/
+build/
 node_modules/
 .DS_Store
 *.log
