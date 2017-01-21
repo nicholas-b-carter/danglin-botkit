@@ -2,7 +2,7 @@ const ngrok         = require('ngrok');
 const open          = require('open');
 const dotenv        = require('dotenv');
 
-export.default = () => {
+export default function() {
   //load environment variables,
   //either from .env files (development),
   //heroku environment in production, etc...
